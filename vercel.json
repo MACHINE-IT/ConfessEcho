@@ -1,24 +1,6 @@
 {
-  "name": "confessecho",
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "regions": ["iad1"],
-  "env": {
-    "MONGODB_URI": "@mongodb_uri",
-    "NEXTAUTH_SECRET": "@nextauth_secret",
-    "GOOGLE_CLIENT_ID": "@google_client_id",
-    "GOOGLE_CLIENT_SECRET": "@google_client_secret",
-    "OPENAI_API_KEY": "@openai_api_key",
-    "RESEND_API_KEY": "@resend_api_key",
-    "ADMIN_EMAILS": "@admin_emails"
-  },
   "functions": {
-    "src/app/api/**": {
+    "app/api/**/*.ts": {
       "maxDuration": 30
     }
   },
