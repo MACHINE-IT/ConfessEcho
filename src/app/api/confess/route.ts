@@ -61,13 +61,17 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
+    console.log('Starting confession fetch...');
     await dbConnect();
+    console.log('Database connected successfully');
     
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '10');
     const sort = searchParams.get('sort') || 'recent';
     const tag = searchParams.get('tag');
+    
+    console.log('Query params:', { page, limit, sort, tag });
     
     const skip = (page - 1) * limit;
     
@@ -88,16 +92,19 @@ export async function GET(req: NextRequest) {
       sortQuery = { totalVotes: -1, createdAt: -1 };
     }
     
+    console.log('Executing query...');
     // Get confessions with pagination
     const confessions = await Confession.find(query)
-      .populate('comments')
       .sort(sortQuery)
       .skip(skip)
       .limit(limit)
       .lean();
     
+    console.log('Found confessions:', confessions.length);
+    
     // Get total count for pagination
     const total = await Confession.countDocuments(query);
+    console.log('Total count:', total);
     
     const response = {
       confessions,
