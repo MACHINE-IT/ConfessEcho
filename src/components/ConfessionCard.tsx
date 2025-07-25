@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { VoteButton } from '@/components/ui/vote-button'
 import { MessageCircle, Sparkles } from 'lucide-react'
-import { IConfession } from '@/types'
+import { IConfession, IComment } from '@/types'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
@@ -30,7 +30,7 @@ function timeAgo(date: Date) {
 
 interface ConfessionCardProps {
   confession: IConfession & {
-    comments?: any[]
+    comments?: IComment[]
     userVote?: 'upvote' | 'downvote' | null
   }
   showPreview?: boolean

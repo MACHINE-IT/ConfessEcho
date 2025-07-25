@@ -72,13 +72,13 @@ export async function GET(req: NextRequest) {
     const skip = (page - 1) * limit;
     
     // Build query
-    const query: any = {};
+    const query: Record<string, unknown> = {};
     if (tag && tag !== 'all') {
       query.tag = tag;
     }
     
     // Build sort
-    let sortQuery: any = { createdAt: -1 }; // Default: recent
+    let sortQuery: Record<string, number> = { createdAt: -1 }; // Default: recent
     
     if (sort === 'trending') {
       // Trending: high votes + recent (last 7 days weight)
