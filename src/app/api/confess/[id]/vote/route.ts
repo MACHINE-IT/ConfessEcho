@@ -6,15 +6,12 @@ import Vote from '@/models/Vote';
 import { authOptions } from '@/lib/auth';
 import { ApiResponse } from '@/types';
 
-interface Params {
-  id: string;
-}
-
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     
     if (!session?.user) {
@@ -35,7 +32,7 @@ export async function PATCH(
       }, { status: 400 });
     }
     
-    const confession = await Confession.findById(params.id);
+    const confession = await Confession.findById(id);
     
     if (!confession) {
       return NextResponse.json<ApiResponse>({
@@ -47,7 +44,7 @@ export async function PATCH(
     // Check if user already voted
     const existingVote = await Vote.findOne({
       user: session.user.id,
-      confession: params.id,
+      confession: id,
     });
     
     if (existingVote) {
@@ -106,7 +103,7 @@ export async function PATCH(
       // Create new vote
       await Vote.create({
         user: session.user.id,
-        confession: params.id,
+        confession: id,
         voteType,
       });
       

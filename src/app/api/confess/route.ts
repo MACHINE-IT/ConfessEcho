@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import '@/models'; // Import all models to ensure they're registered
 import Confession from '@/models/Confession';
-import { ApiResponse, CreateConfessionData, PaginationParams } from '@/types';
+import { ApiResponse, CreateConfessionData } from '@/types';
 
 export async function POST(req: NextRequest) {
   try {

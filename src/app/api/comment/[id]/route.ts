@@ -5,15 +5,12 @@ import Comment from '@/models/Comment';
 import { authOptions } from '@/lib/auth';
 import { ApiResponse } from '@/types';
 
-interface Params {
-  id: string;
-}
-
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     
     if (!session?.user?.isAdmin) {
@@ -25,7 +22,7 @@ export async function DELETE(
     
     await dbConnect();
     
-    const comment = await Comment.findById(params.id);
+    const comment = await Comment.findById(id);
     
     if (!comment) {
       return NextResponse.json<ApiResponse>({

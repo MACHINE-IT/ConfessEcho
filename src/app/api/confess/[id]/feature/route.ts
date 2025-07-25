@@ -5,15 +5,12 @@ import Confession from '@/models/Confession';
 import { authOptions } from '@/lib/auth';
 import { ApiResponse } from '@/types';
 
-interface Params {
-  id: string;
-}
-
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     
     if (!session?.user?.isAdmin) {
@@ -27,7 +24,7 @@ export async function PATCH(
     
     const { isFeatured }: { isFeatured: boolean } = await req.json();
     
-    const confession = await Confession.findById(params.id);
+    const confession = await Confession.findById(id);
     
     if (!confession) {
       return NextResponse.json<ApiResponse>({

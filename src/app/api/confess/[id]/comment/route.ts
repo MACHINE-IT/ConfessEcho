@@ -6,15 +6,12 @@ import Confession from '@/models/Confession';
 import { authOptions } from '@/lib/auth';
 import { ApiResponse } from '@/types';
 
-interface Params {
-  id: string;
-}
-
 export async function POST(
   req: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     
     if (!session?.user) {
@@ -43,7 +40,7 @@ export async function POST(
     }
     
     // Check if confession exists
-    const confession = await Confession.findById(params.id);
+    const confession = await Confession.findById(id);
     
     if (!confession) {
       return NextResponse.json<ApiResponse>({
@@ -55,7 +52,7 @@ export async function POST(
     const comment = await Comment.create({
       content: content.trim(),
       author: session.user.id,
-      confession: params.id,
+      confession: id,
     });
     
     // Populate author information

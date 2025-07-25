@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import Confession from '@/models/Confession';
-import Comment from '@/models/Comment';
 import { ApiResponse } from '@/types';
 
 export async function GET(req: NextRequest) {
