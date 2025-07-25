@@ -78,7 +78,7 @@ export async function GET(req: NextRequest) {
     }
     
     // Build sort
-    let sortQuery: Record<string, number> = { createdAt: -1 }; // Default: recent
+    let sortQuery: { [key: string]: 1 | -1 } = { createdAt: -1 }; // Default: recent
     
     if (sort === 'trending') {
       // Trending: high votes + recent (last 7 days weight)
