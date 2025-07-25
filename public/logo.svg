@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle representing echo/sound waves -->
+  <circle cx="50" cy="50" r="45" stroke="#3B82F6" stroke-width="3" fill="none" opacity="0.3"/>
+  
+  <!-- Middle circle -->
+  <circle cx="50" cy="50" r="35" stroke="#3B82F6" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Inner circle -->
+  <circle cx="50" cy="50" r="25" stroke="#3B82F6" stroke-width="2" fill="none" opacity="0.7"/>
+  
+  <!-- Heart shape in center representing confessions/emotions -->
+  <path d="M50 30c-5-10-20-10-20 2 0 8 12 15 20 25 8-10 20-17 20-25 0-12-15-12-20-2z" fill="#EF4444"/>
+  
+  <!-- Sound waves on the right -->
+  <path d="M70 40 Q75 45 75 50 Q75 55 70 60" stroke="#2563EB" stroke-width="2" fill="none" opacity="0.8"/>
+  <path d="M75 35 Q82 42 82 50 Q82 58 75 65" stroke="#2563EB" stroke-width="2" fill="none" opacity="0.6"/>
+</svg>

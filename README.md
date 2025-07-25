@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ConfessEcho - Anonymous Confession Web App
+
+A full-stack anonymous confession web app built with Next.js 14+, MongoDB, and modern UI components.
+
+## Features
+
+- 🔐 **Anonymous Confessions** - Anyone can post confessions without login
+- 👆 **Voting System** - Upvote/downvote confessions (requires login)
+- 💬 **Comments** - Add comments (login required)
+- 🤖 **AI Advice** - Get advice on confessions using OpenAI API
+- 👑 **Admin Panel** - Manage confessions and users (admin only)
+- 🔍 **Trending** - View top confessions by votes and time
+- 🏷️ **Tags** - Filter confessions by category
+- 📱 **Responsive** - Mobile-first design
+
+## Tech Stack
+
+- **Frontend**: Next.js 14+ App Router, Tailwind CSS, ShadCN UI
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB with Mongoose
+- **Auth**: NextAuth.js with Google OAuth
+- **AI**: OpenAI API
+- **Email**: Resend
+- **Deployment**: Vercel + MongoDB Atlas
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+3. Set up environment variables:
+   Copy `.env.local` and fill in your credentials:
+   - MongoDB connection string
+   - NextAuth secret and Google OAuth credentials
+   - OpenAI API key
+   - Resend API key
+   - Admin emails
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Environment Variables
+
+```env
+MONGODB_URI=mongodb+srv://...
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+OPENAI_API_KEY=sk-...
+RESEND_API_KEY=re_...
+ADMIN_EMAILS=admin@example.com
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `POST /api/confess` - Create confession
+- `GET /api/confess` - List confessions
+- `GET /api/confess/[id]` - Get single confession
+- `PATCH /api/confess/[id]/vote` - Vote on confession
+- `PATCH /api/confess/[id]/feature` - Feature confession (admin)
+- `DELETE /api/confess/[id]` - Delete confession (admin)
+- `POST /api/confess/[id]/comment` - Add comment
+- `DELETE /api/comment/[id]` - Delete comment (admin)
+- `GET /api/trending` - Get trending confessions
+- `POST /api/ai/advice` - Get AI advice
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pages
 
-## Learn More
+- `/` - Home feed
+- `/confess` - New confession form
+- `/confession/[id]` - Single confession view
+- `/admin` - Admin dashboard
+- `/profile` - User profile
+- `/login` - Authentication
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Deploy on Vercel with MongoDB Atlas:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push to GitHub
+2. Connect to Vercel
+3. Set environment variables
+4. Deploy!
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License
